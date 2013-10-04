@@ -1,0 +1,109 @@
+import java.io.PrintWriter;
+import java.util.Arrays;
+
+
+public class TaskA {
+ 
+	private int[] values;
+    private int[] weights;
+	
+	private int knapsackWeight;
+    private int totalItems;
+    
+    private int[][] DP;
+	
+	
+	public void solve(InputReader in, PrintWriter writer) {
+		getMaxValue(in);
+		
+	}
+
+	public int getMaxValue(InputReader in) {
+
+         knapsackWeight = in.nextInt();
+         totalItems = in.nextInt();
+
+         values = new int[totalItems];
+         weights = new int[totalItems];
+
+         	for (int i = 0; i < totalItems; i++) {
+         			values[i] = in.nextInt();
+         			weights[i] = in.nextInt();
+         	}
+
+// return runKnapSack();
+   return runKnapSackRecurse();
+  }
+
+	private int runKnapSackRecurse() {
+		/*DP = new int[totalItems][knapsackWeight+1];
+
+		for (int i = 0; i < totalItems; i++) {
+		//Arrays.fill(DP[i], -1);
+		Arrays.fill(DP[0], 0);
+		}*/
+
+		return runKnapSackRecurse(knapsackWeight, totalItems-1);
+		//return 0;
+	}
+
+	private int runKnapSackRecurse(int knapsackWeight2, int totalItems) {
+		
+		//int[] knapSackValues = new int[knapsackWeight2+1];
+		
+		   // for(int i=1;i<=totalItems;i++)
+		  //  {
+		    //	for(int w=0;w<=knapsackWeight2;w++)
+		    	//{
+		    		int[] knapSackValues = new int[knapsackWeight2+1];
+
+		    		for (int i = 0; i < totalItems; i++) {
+		    		for (int j = knapsackWeight; j >= 0; j--) {
+		    		if (i==0) {
+		    		knapSackValues[j] = (j >= weights[i]) ? values[i] : 0;
+		    		}
+		    		else if (j < weights[i]) {
+		    		// do nothing as same array
+		    		} else {
+		    		knapSackValues[j] = Math.max(knapSackValues[j-weights[i]] + values[i],
+		    		knapSackValues[j]);
+		    		}
+		    		}
+		    		
+		    		
+		    		}
+		    		
+		    		System.out.println("Element of i = "+  knapSackValues[knapsackWeight]);
+
+		    		//return knapSackValues[knapsackWeight];
+		    		
+		    		return 0;
+		    		
+		    		
+		    		/*
+		    		if(weights[i]<=w)
+		    		{
+		    			if(values[i]+DP[i-1][w-weights[i]]	> DP[i-1][w])
+		    				DP[i][w]= values[i]+DP[i-1][w-weights[i]];
+		    			else
+		    				DP[i][w] = DP[i-1][w];
+		    			
+		    			if(values[i]+knapSackValues[w-weights[i]]	> knapSackValues[w])
+		    				knapSackValues[w]= values[i]+knapSackValues[w-weights[i]];
+		    			else
+		    				knapSackValues[w] = DP[i-1][w];
+		    			
+		    		}
+		    		else
+		    		{
+		    			DP[i][w] = DP[i-1][w];	
+		    		}
+		    		
+		    		System.out.println("Element of i = "+i+" and w = "+w+"is =   " + DP[i][w]);
+		    //	*/}
+		  //  }
+	
+		//	return 0;
+	}
+	
+
